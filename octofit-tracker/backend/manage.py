@@ -15,7 +15,12 @@ def main():
             "available on your PYTHONPATH environment variable? Did you "
             "forget to activate a virtual environment?"
         ) from exc
-    execute_from_command_line(sys.argv)
+    try:
+        execute_from_command_line(sys.argv)
+    except SystemExit as e:
+        if e.code != 0:
+            print(f"Management command exited with error code: {e.code}")
+        raise
 
 
 if __name__ == "__main__":
