@@ -6,12 +6,13 @@ from .models import User, Team, Activity, Leaderboard, Workout
 
 @api_view(['GET'])
 def api_root(request, format=None):
+    base_url = 'https://sturdy-halibut-5gp5569779cv57w-8000.app.github.dev/'
     return Response({
-        'users': 'http://127.0.0.1:8000/api/users/',
-        'teams': 'http://127.0.0.1:8000/api/teams/',
-        'activities': 'http://127.0.0.1:8000/api/activities/',
-        'leaderboard': 'http://127.0.0.1:8000/api/leaderboard/',
-        'workouts': 'http://127.0.0.1:8000/api/workouts/'
+        'users': base_url + 'api/users/',
+        'teams': base_url + 'api/teams/',
+        'activities': base_url + 'api/activities/',
+        'leaderboard': base_url + 'api/leaderboard/',
+        'workouts': base_url + 'api/workouts/'
     })
 
 class UserViewSet(viewsets.ModelViewSet):
