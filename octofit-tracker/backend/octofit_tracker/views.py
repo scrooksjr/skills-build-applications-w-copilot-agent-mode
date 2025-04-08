@@ -4,15 +4,17 @@ from rest_framework.response import Response
 from .serializers import UserSerializer, TeamSerializer, ActivitySerializer, LeaderboardSerializer, WorkoutSerializer
 from .models import User, Team, Activity, Leaderboard, Workout
 
-@api_view(['GET'])
+@api_view(['GET', 'POST'])
 def api_root(request, format=None):
-    base_url = 'https://sturdy-halibut-5gp5569779cv57w-8000.app.github.dev/'
+    if request.method == 'POST':
+        return Response({"message": "POST request received"}, status=status.HTTP_201_CREATED)
+
     return Response({
-        'users': base_url + 'api/users/',
-        'teams': base_url + 'api/teams/',
-        'activities': base_url + 'api/activities/',
-        'leaderboard': base_url + 'api/leaderboard/',
-        'workouts': base_url + 'api/workouts/'
+        'users': 'http://localhost:8000/api/users/',
+        'teams': 'http://localhost:8000/api/teams/',
+        'activities': 'http://localhost:8000/api/activities/',
+        'leaderboard': 'http://localhost:8000/api/leaderboard/',
+        'workouts': 'http://localhost:8000/api/workouts/'
     })
 
 class UserViewSet(viewsets.ModelViewSet):

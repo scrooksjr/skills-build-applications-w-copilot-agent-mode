@@ -7,12 +7,21 @@ class Command(BaseCommand):
     help = 'Populate the database with test data for users, teams, activities, leaderboard, and workouts'
 
     def handle(self, *args, **kwargs):
+        self.stdout.write(self.style.SUCCESS('Starting database population...'))
+        self.stdout.write(self.style.SUCCESS(f'Users before population: {User.objects.count()}'))
+        self.stdout.write(self.style.SUCCESS(f'Teams before population: {Team.objects.count()}'))
+        self.stdout.write(self.style.SUCCESS(f'Activities before population: {Activity.objects.count()}'))
+        self.stdout.write(self.style.SUCCESS(f'Leaderboard entries before population: {Leaderboard.objects.count()}'))
+        self.stdout.write(self.style.SUCCESS(f'Workouts before population: {Workout.objects.count()}'))
+
         # Clear existing data
         User.objects.all().delete()
         Team.objects.all().delete()
         Activity.objects.all().delete()
         Leaderboard.objects.all().delete()
         Workout.objects.all().delete()
+
+        self.stdout.write(self.style.SUCCESS('Existing data cleared.'))
 
         # Create users
         users = [
@@ -61,5 +70,11 @@ class Command(BaseCommand):
             Workout(_id=ObjectId(), name='Swimming Training', description='Training for a swimming competition'),
         ]
         Workout.objects.bulk_create(workouts)
+
+        self.stdout.write(self.style.SUCCESS(f'Users after population: {User.objects.count()}'))
+        self.stdout.write(self.style.SUCCESS(f'Teams after population: {Team.objects.count()}'))
+        self.stdout.write(self.style.SUCCESS(f'Activities after population: {Activity.objects.count()}'))
+        self.stdout.write(self.style.SUCCESS(f'Leaderboard entries after population: {Leaderboard.objects.count()}'))
+        self.stdout.write(self.style.SUCCESS(f'Workouts after population: {Workout.objects.count()}'))
 
         self.stdout.write(self.style.SUCCESS('Successfully populated the database with test data.'))
