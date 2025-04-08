@@ -26,7 +26,7 @@ SECRET_KEY = "django-insecure-2b$isyh7(a6v^l5x5sa#^ezt)ayf9o9m9h)k8uv+1q#jv7uto-
 DEBUG = True
 
 # Allow all hosts
-ALLOWED_HOSTS = ["*"]
+ALLOWED_HOSTS = ["sturdy-halibut-5gp5569779cv57w-8000.app.github.dev", "localhost", "127.0.0.1"]
 
 
 # Application definition
